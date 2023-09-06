@@ -1,0 +1,41 @@
+<div
+  class="w-[600px] h-72 bg-[#6343f8] max-md:h-[600px] max-md:w-[285px] max-md:grid-cols-1 rounded-lg shadow-lg grid grid-cols-[40%,1fr]">
+  <img class="h-72 rounded-lg" src="{{ image }}" alt>
+  <div class="p-4 flex flex-col gap-3">
+    <h2 class="text-2xl font-bold text-[#f338ba]">{{ name }}</h2>
+    <div class="flex gap-2 items-center">
+      <p class="text-[#f338ba] font-bold">Status:</p>
+      <app-badges
+        [color]="status === 'Dead' ? 'bg-[#f82042]' : 'bg-[#2bfc42]'"
+        [title]="status"
+      ></app-badges>
+    </div>
+    <div class="flex gap-2 items-center">
+      <p class="text-[#f338ba] font-bold">Especie:</p>
+      <app-badges
+        color="bg-[#bd52bb]"
+        [title]="species"
+      ></app-badges>
+      <app-badges
+      color="bg-[#4f7de4]"
+      [title]="gender"
+    ></app-badges>
+    </div>
+    <div>
+      <h3 class="text-lg text-[#f338ba] font-bold">
+        Origem:
+      </h3>
+      <p class="text-white">
+        {{ originName }}
+      </p>
+    </div>
+    <div>
+      <h3 class="text-lg text-[#f338ba] font-bold">
+        Ultima aparição:
+      </h3>
+      <p class="text-white">
+        {{ locationName }}
+      </p>
+    </div>
+  </div>
+</div>
