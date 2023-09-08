@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonagensService, Personagens } from '../services/personagens.service';
+import { PersonagensService, Personagens, Infos } from '../services/personagens.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,11 +10,23 @@ import { Observable } from 'rxjs';
 
 export class HomeComponent implements OnInit {
 
-  personagens$: Observable<Personagens[]> = new Observable<Personagens[]>();
+  characters: Personagens[] = [];
+  infos: Infos = {} as Infos;
+  maxNumberOfCharacters = 826;
 
   constructor(private personagensService: PersonagensService) { }
 
   ngOnInit(): void {
-    this.personagens$ = this.personagensService.getAllCharacters();
+    this.getCharacters();
+  }
+
+  getCharacters() {
+    this.personagensService.getAllCharacters(this.infos.next).subscribe({
+      next: (result) => {
+        const { results, info } = result;
+        this.characters.push(...results);
+        this.infos = info;
+      }
+    })
   }
 }

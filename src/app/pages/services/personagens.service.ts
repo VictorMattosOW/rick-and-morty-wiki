@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, map } from 'rxjs'
 
-interface Infos {
+export interface Infos {
   count: number
   next: string
   pages: number
@@ -40,10 +40,9 @@ export class PersonagensService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getAllCharacters(): Observable<Personagens[]> {
-    return this.http.get<{ info: Infos, results: Personagens[] }>(this.url).pipe(
-      map(({info, results}) => results)
-    )
+  getAllCharacters(nextPage?: string): Observable<{ info: Infos, results: Personagens[] }> {
+    let getMoreCharacters = nextPage ? nextPage : this.url;
+    return this.http.get<{ info: Infos, results: Personagens[] }>(getMoreCharacters);
   }
 
 }

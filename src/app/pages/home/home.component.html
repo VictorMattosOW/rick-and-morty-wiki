@@ -1,6 +1,6 @@
-<main class="grid grid-cols-2 max-xl:grid-cols-1 px-12 py-10 justify-items-center gap-10"
-  *ngIf="personagens$ | async as personagem">
-  <ng-container *ngFor="let person of personagem">
+<main
+  class="grid grid-cols-2 max-xl:grid-cols-1 px-12 py-10 justify-items-center gap-10">
+  <ng-container *ngFor="let person of characters">
     <app-card
       [image]="person.image"
       [name]="person.name"
@@ -8,8 +8,14 @@
       [species]="person.species"
       [gender]="person.gender"
       [originName]="person.origin.name"
-      [locationName]="person.location.name"
-    ></app-card>
+      [locationName]="person.location.name"></app-card>
   </ng-container>
-
+  <button 
+    (click)="getCharacters();" 
+    *ngIf="characters.length <= maxNumberOfCharacters"
+    class="w-72 h-12 bg-[#f338ba] hover:bg-[#c02c92] border-1 border-solid border-[#8ffd5a] border col-span-2 rounded-full text-lg text-[#8ffd5a] font-bold"
+    >
+    Carregar
+    mais personagens
+  </button>
 </main>
